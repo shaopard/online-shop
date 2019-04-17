@@ -1,0 +1,48 @@
+﻿@model IEnumerable<onLineShop.Model.Product>
+
+<h2>Index</h2>
+
+<br/>
+<p>
+    @Html.ActionLink("All products", "Index", null, new { @class = "btn btn-lg btn-info" })
+    @Html.ActionLink("CPU", "Index", new {productCategory = "CPU"}, new {@class = "btn btn-lg btn-info"})
+    @Html.ActionLink("Placi V", "Index", new {productCategory = "Placa V"}, new {@class = "btn btn-lg btn-info"})
+</p>
+
+<table class="table">
+
+    <tr>
+        <th>
+            <p>Picture</p>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCategory)
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", new { id = item.ProductId })">
+                <img style="width: 15%" src="/images/@item.ImageUrl" alt="@item.Description" />
+            </a>
+        </td>
+        <td>
+            @Html.ActionLink(item.Description, "Details", new {id = item.ProductId}) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCategory.Description)
+        </td>
+    </tr>
+}
+
+</table>
